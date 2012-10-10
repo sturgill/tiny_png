@@ -1,0 +1,4 @@
+.bundle
+tiny_png*.gem
+Gemfile.lock
+.rvmrc

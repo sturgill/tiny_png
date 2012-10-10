@@ -20,6 +20,10 @@ process.  The kind of process a computer was made to do for you.  Ergo this gem.
 
 This gem interacts with TinyPNG's API to replace a given PNG with its shrunken counterpart.
 
+When you pass a full path into the `shrink` method, it will replace the source image with the image
+returned by TinyPNG.  If this process fails for whatever reason, the original image will be restored.
+On success, the original image is completely overwritten and is no longer available.
+
 ## Installation
 
 If you're using bundler, just add the following to your Gemfile:

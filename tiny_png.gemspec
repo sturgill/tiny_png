@@ -8,7 +8,8 @@ Gem::Specification.new do |s|
   s.author = 'Chris Sturgill'
   s.email = 'chris@thesturgills.com'
   s.files = Dir["{lib}/**/*.rb", "bin/*", "LICENSE", "*.md"]
-  s.homepage = 'http://chris.thesturgills.com'
+  s.homepage = 'https://github.com/sturgill/tiny_png'
   s.require_path = 'lib'
   s.add_dependency 'httparty'
+  s.license = 'MIT'
 end

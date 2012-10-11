@@ -1,5 +1,4 @@
-$:.push File.expand_path('../lib', __FILE__)
-require 'tiny_png/version'
+require File.expand_path(File.join(File.dirname(__FILE__), 'lib', 'tiny_png', 'version'))
 
 Gem::Specification.new do |s|
   s.name = 'tiny_png'
@@ -16,7 +15,7 @@ Gem::Specification.new do |s|
   s.add_dependency 'httparty'
   s.license = 'MIT'
   s.post_install_message = %q{For easiest use, create a config file at config/tiny_png.yml file.  Example:
-    https://github.com/sturgill/tiny_png/sample_config.yml
+    https://github.com/sturgill/tiny_png/blob/master/sample_config.yml
     
   }
 end

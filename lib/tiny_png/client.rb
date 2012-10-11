@@ -1,8 +1,8 @@
 require 'base64'
 require 'httparty'
-require File.join File.dirname(__FILE__), 'exceptions'
-require File.join File.dirname(__FILE__), 'shrink'
-require File.join File.dirname(__FILE__), 'exception_handling'
+require 'tiny_png/exceptions'
+require 'tiny_png/shrink'
+require 'tiny_png/exception_handling'
 
 module TinyPng
   class Client

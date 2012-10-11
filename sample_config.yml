@@ -1,0 +1,3 @@
+development:
+  suppress_exceptions: false
+  api_key: my_api_key_here

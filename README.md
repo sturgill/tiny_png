@@ -18,6 +18,9 @@ this API was introduced, TinyPNG could only be used from their [web interface](h
 And while their homepage is cool and all, manually uploading and saving files is a less-than-enjoyable
 process.  The kind of process a computer was made to do for you.  Ergo this gem.
 
+**TinyPNG's API service is currently in private beta.  You will need to request an API key to use this gem.**
+[See here](https://twitter.com/tinypng/status/256049113852944384) for details.
+
 This gem interacts with TinyPNG's API to replace a given PNG with its shrunken counterpart.
 
 When you pass a full path into the `shrink` method, it will replace the source image with the image
@@ -34,27 +37,49 @@ gem 'tiny_png'
 
 ## Usage
 
-Create an instance of the `TinyPng::Shrink` class, passing in your API key:
+Create an instance of the `TinyPng::Client` class, passing in your API key:
 
 ```ruby
-@tiny = TinyPng::Shrink.new API_KEY
+@client = TinyPng::Client.new API_KEY
 ```
 
 If you want to work with a list of images, and want to silently suppress exceptions, just pass that in the options field:
 
 ```ruby
-@tiny = TinyPng::Shrink.new API_KEY, { :suppress_exceptions => true }
+@client = TinyPng::Client.new API_KEY, { :suppress_exceptions => true }
 ```
 
-Next, pass in the full path to the image you want to shrink
+Next, pass in the full paths to the images you want to shrink (you can also pass in whole directories)
 
 ```ruby
-@tiny.shrink '/FULL/PATH/TO/IMAGE.png'
+@client.shrink '/FULL/PATH/TO/IMAGE.png'
 ```
 
-The shrunken image will be saved in the same path, effectively overwriting the old file.
+```ruby
+@client.shrink '/FULL/PATH/TO/image.png', '/FULL/PATH/TO/ANOTHER/image.png', '/DIRECTORY/WITH/LOTS/OF/IMAGES'
+```
+
+The `shrink` method will return a hash of arrays letting you know which paths were successfully overwritten and which
+ones failed:
+
+```
+{
+	:success => [
+		'/THIS/ONE/WAS/overwritten.png',
+		'/THIS/ONE/WAS/ALSO/overwritten.png'
+	], 
+	:failure => [
+		'/THIS/FAILED/AND/WAS/reverted.png',
+		'/THIS/ISNT/A/png.gif'
+	]
+}
+```
+
+Each successfully shrunken image will overwrite the original file.
 
 **NOTE:**
+
+For each image path analyzed (whether sent in directly or picked out of a folder):
 
 - There must be a file already at the specified path
 - That file must be readable and writeable

@@ -164,7 +164,7 @@ Naturally, these can all be combined in any fashion:
 SUPPRESS_EXCEPTIONS=true API_KEY=my_api_key SHRINK=/image/directory,/some/image.png rake tiny_png:shrink
 ```
 
-### Using In Capistrano
+### Using With Capistrano
 
 Since Photoshop doesn't support indexed PNGs with alpha transparency, you might not want to convert the
 images on your local box.  With the included Capistrano recipe, you can automatically shrink all files

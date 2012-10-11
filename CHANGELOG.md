@@ -1,3 +1,7 @@
+Edge
+
+- Capistrano recipe to shrink images on deploy
+
 0.3.0.pre - October 11, 2012
 
 - Use of config file

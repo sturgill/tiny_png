@@ -34,7 +34,7 @@ module TinyPng
       @options = {
         :suppress_exceptions => config['suppress_exceptions'] || false,
         :api_key => config['api_key'] || '',
-        :username => config['api_user'] || 'api'
+        :api_user => config['api_user'] || 'api'
       }.merge(options)
     end
   end

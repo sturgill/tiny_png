@@ -1,4 +1,4 @@
-$LOAD_PATH.unshift 'lib'
+$:.push File.expand_path('../lib', __FILE__)
 require 'tiny_png/version'
 
 Gem::Specification.new do |s|

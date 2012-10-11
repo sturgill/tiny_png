@@ -4,7 +4,7 @@ namespace :tiny_png do
     abort "set SHRINK env var, e.g., $ SHRINK=/path/to/image.png,/path/to/another.png rake tiny_png:shrink" if ENV['SHRINK'].nil?
 
     options = {}    
-    [:api_key, :user_name].each do |key|
+    [:api_key, :api_user].each do |key|
       env_key = key.to_s.upcase
       options[key] = ENV[env_key] unless ENV[env_key].nil?
     end

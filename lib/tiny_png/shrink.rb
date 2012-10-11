@@ -46,7 +46,11 @@ module TinyPng::Shrink
     current_content = File.read image_path
     
     # passes our quick checks, so let's fire off the request
-    response = self.class.post('/api/shrink', :basic_auth => @auth, :body => current_content.force_encoding('BINARY'))
+    response = self.class.post(
+      '/api/shrink',
+      :basic_auth => { :username => @options[:username], :password => @options[:api_key] },
+      :body => current_content.force_encoding('BINARY')
+    )
     
     # abort unless TinyPNG successfully did its thing
     return raise_exception ShrinkingFailed, response.message unless response.code == 200

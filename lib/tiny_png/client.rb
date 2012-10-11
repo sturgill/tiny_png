@@ -24,9 +24,18 @@ module TinyPng
     #
     # Returns: TinyPng::Client instance
     #
-    def initialize api_key, options={}
-      @options = { :suppress_exceptions => false }.merge options
-      @auth = { :username => 'api', :password => api_key }
+    def initialize options={}
+      if defined?(Rails) && Rails.try(:root) && Rails.try(:env)
+        config_path = File.join(Rails.root, 'config', 'tiny_png.yml')
+        config = YAML.load_file(config_path)[Rails.env] if File.exists? config_path
+      end
+      config ||= {}
+      
+      @options = {
+        :suppress_exceptions => config['suppress_exceptions'] || false,
+        :api_key => config['api_key'] || '',
+        :username => config['api_user'] || 'api'
+      }.merge(options)
     end
   end
 end

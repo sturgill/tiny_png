@@ -1,4 +1,4 @@
-Edge
+1.0.0
 
 - Capistrano recipe to shrink images on deploy
 

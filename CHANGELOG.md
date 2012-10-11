@@ -1,4 +1,4 @@
-1.0.0
+1.0.0 - October 11, 2012
 
 - Capistrano recipe to shrink images on deploy
 

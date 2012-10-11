@@ -44,7 +44,7 @@ Create an instance of the `TinyPng::Client` class:
 @client = TinyPng::Client.new
 ```
 
-Note that this will look for the configuration file in `config/tiny_png.yml`.  See the [sample config](https://github.com/sturgill/tiny_png/sample_config.yml).
+Note that this will look for the configuration file in `config/tiny_png.yml`.  See the [sample config](https://github.com/sturgill/tiny_png/blob/master/sample_config.yml).
 If you choose to not use the config file, you will need to pass in your API key in the optional hash:
 
 ```ruby

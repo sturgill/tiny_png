@@ -1,3 +1,3 @@
 module TinyPng
-  Version = VERSION = '0.3.1.pre'
+  Version = VERSION = '1.0.0'
 end

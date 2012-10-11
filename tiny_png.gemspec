@@ -10,7 +10,7 @@ Gem::Specification.new do |s|
   s.author = 'Chris Sturgill'
   s.email = 'chris@thesturgills.com'
   s.files = `git ls-files`.split($/)
-  s.homepage = 'https://github.com/sturgill/tiny_png'
+  s.homepage = 'http://chris.thesturgills.com'
   s.require_paths = ['lib']
   s.add_dependency 'httparty'
   s.license = 'MIT'

@@ -13,14 +13,22 @@ module TinyPng
     base_uri 'api.tinypng.org'
     
     #
-    # Create a new instance of the TinyPng::Shrink class
+    # Create a new instance of the TinyPng::Shrink class.  Any key not passed into the
+    # options hash will use the corresponding value from config/tiny_png.yml. If the config
+    # file does not exist, or if the config file does not define a given value, sensible defaults 
+    # (as outlined below) will be used.
     #
     # Arguments:
-    # - api_key (String)
     # - options (Hash)
     #   - :suppress_exceptions (Boolean)
     #     Default: false
-    #     If false (the default), exceptions will be raised when the process fails.  If suppression is turned on, exceptions will not be raised, but a false value will be returned if shrinking fails for any reason.
+    #     If false (the default), exceptions will be raised when the process fails.  If suppression is 
+    #     turned on, exceptions will not be raised, but a false value will be returned if shrinking fails 
+    #     for any reason.
+    #   - :api_key (String)
+    #     Default: ''
+    #   - :api_user (String)
+    #     Default: 'api'
     #
     # Returns: TinyPng::Client instance
     #

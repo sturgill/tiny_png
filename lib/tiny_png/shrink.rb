@@ -2,7 +2,8 @@ module TinyPng::Shrink
   #
   # Replace an image at a given path with its shrunken version
   #
-  # The image at the given path will be submitted to TinyPNG and the new version will overwrite the original.  If this process fails for any reason, the original file will be rolled back.
+  # The image at the given path will be submitted to TinyPNG and the new version will overwrite the original.
+  # If this process fails for any reason, the original file will be rolled back.
   #
   # Arguments:
   # - shrinkwrap (any number of objects to be shrunk)
@@ -10,7 +11,7 @@ module TinyPng::Shrink
   #
   #   If you send in a path to a specific file, it must end in `.png` or it will not be sent to TinyPNG for processing.
   #
-  #   Likewise, when traversing through a directory, only files that end in `.png` will be processed.
+  #   Likewise, when traversing through a directory, only files that end in `.png` will be examined.
   #
   #   All paths to specific files (whether sent in directly or picked out from the directory) need to be readable and writeable.
   #

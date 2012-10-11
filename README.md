@@ -5,6 +5,7 @@
 - [Installation] (#installation)
 - [Usage] (#usage)
 	- [Using From Rake](#using-from-rake)
+	- [Using With Capistrano](#using-with-capistrano)
 
 ## What Is TinyPNG
 
@@ -27,6 +28,10 @@ This gem interacts with TinyPNG's API to replace a given PNG with its shrunken c
 When you pass a full path into the `shrink` method, it will replace the source image with the image
 returned by TinyPNG.  If this process fails for whatever reason, the original image will be restored.
 On success, the original image is completely overwritten and is no longer available.
+
+These features can also be used via [Rake](#using-from-rake) or [Capistrano](#using-with-capistrano).
+The latter gives you the option of setting up your deploy to automatically convert your images on your
+external servers!
 
 ## Installation
 
@@ -157,4 +162,40 @@ Naturally, these can all be combined in any fashion:
 
 ```ruby
 SUPPRESS_EXCEPTIONS=true API_KEY=my_api_key SHRINK=/image/directory,/some/image.png rake tiny_png:shrink
+```
+
+### Using In Capistrano
+
+Since Photoshop doesn't support indexed PNGs with alpha transparency, you might not want to convert the
+images on your local box.  With the included Capistrano recipe, you can automatically shrink all files
+in your deploy path.
+
+First, include the recipe in your deploy script:
+
+```ruby
+require 'tiny_png/recipes'
+```
+
+Now you can define the callback wherever makes sense for you.  I would recommend calling this before
+the assets are precompiled so that it isn't run multiple times per image:
+
+```ruby
+before 'deploy:assets:precompile', 'tiny_png:shrink'
+```
+
+By default, this script uses the settings found in config/tiny_png.yml.  It also runs through the entire
+release directory.  Each option can be overwritten by setting Capistrano variables.  These variables will
+be sent directly to a Rake task, so the expected format of these variables is the same as listed above:
+
+```ruby
+set :tiny_png_shrink, '/image/directory,/some/image.png'
+set :tiny_png_api_key, 'my_api_key'
+set :tiny_png_suppress_exceptions, true
+```
+
+Also by default, the task is only run on web servers.  This can be modified by setting the `tiny_png_server_role`
+variable:
+
+```ruby
+set :tiny_png_server_role, [:web, :app]
 ```

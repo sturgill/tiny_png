@@ -1,3 +1,7 @@
+1.1.0 - October 12, 2012
+
+- Create TinyPng::Path class to allow for blacklisting
+
 1.0.0 - October 11, 2012
 
 - Capistrano recipe to shrink images on deploy

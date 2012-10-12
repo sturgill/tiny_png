@@ -18,18 +18,11 @@ module TinyPng::Shrink
   # Returns: Hash { :success => [Array, Of, Paths, Successfully, Overwrittern], :failure => [Array, Of, Paths, Left, Unchanged] }
   #
   
-  def shrink *shrinkwrap
+  def shrink *paths
     results = { :success => [], :failure => [] }
-    [shrinkwrap].flatten.each do |shrinkable|
-      if File.directory? shrinkable
-        Dir.glob("#{shrinkable.gsub(/\/$/,'')}/**/*.png") do |image_path|
-          key = self.shrink_in_place(image_path) ? :success : :failure
-          results[key].push image_path
-        end
-      else
-        key = shrink_in_place(shrinkable) ? :success : :failure
-        results[key].push shrinkable
-      end
+    TinyPng::Path.get_all(paths).each do |path|
+      key = shrink_in_place(path) ? :success : :failure
+      results[key].push path
     end
     results
   end
@@ -38,7 +31,6 @@ module TinyPng::Shrink
   
   def shrink_in_place image_path
     # check to make sure everything looks kosher before sending data to TinyPNG
-    return raise_exception InvalidFileType, 'The file must be a PNG' unless image_path.downcase.match(/\.png$/)
     return raise_exception FileDoesntExist, "Can't find a file at the specified path" unless File.exists? image_path
     return raise_exception FileNotReadable, "Can't read the requested file" unless File.readable? image_path
     return raise_exception FileNotWriteable, "Can't write to the specifed file" unless File.writable? image_path

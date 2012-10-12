@@ -16,6 +16,9 @@ namespace :tiny_png do
       options[:suppress_exceptions] = ENV['SUPPRESS_EXCEPTIONS'].downcase == 'true'
     end
     
-    TinyPng::Client.new(options).shrink ENV['SHRINK'].split(',')
+    paths = TinyPng::Path.new ENV['SHRINK'].split(',')
+    paths.blacklist ENV['BLACKLIST'].split(',') unless ENV['BLACKLIST'].nil?
+    
+    TinyPng::Client.new(options).shrink paths
   end
 end

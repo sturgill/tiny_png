@@ -1,6 +1,3 @@
-class InvalidFileType < Exception
-end
-
 class FileDoesntExist < Exception
 end
 

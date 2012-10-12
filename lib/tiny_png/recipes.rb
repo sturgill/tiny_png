@@ -17,6 +17,7 @@ Capistrano::Configuration.instance(:must_exist).load do
       env.push "API_KEY=#{self[:tiny_png_api_key]}" unless self[:tiny_png_api_key].nil?
       env.push "API_USER=#{self[:tiny_png_api_user]}" unless self[:tiny_png_api_user].nil?
       env.push "SUPPRESS_EXCEPTIONS=#{self[:tiny_png_suppress_exceptions]}" unless self[:tiny_png_suppress_exceptions].nil?
+      env.push "BLACKLIST=#{self[:tiny_png_blacklist]}" unless self[:tiny_png_blacklist].nil?
       env
     end
 

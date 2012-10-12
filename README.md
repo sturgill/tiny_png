@@ -4,6 +4,7 @@
 - [What Does This Gem Do?] (#what-does-this-gem-do)
 - [Installation] (#installation)
 - [Usage] (#usage)
+	- [Using Blacklists](#using-blacklists)
 	- [Using From Rake](#using-from-rake)
 	- [Using With Capistrano](#using-with-capistrano)
 
@@ -99,6 +100,25 @@ For each image path analyzed (whether sent in directly or picked out of a folder
 - That file must be readable and writeable
 - The file name *must* end in `.png`
 
+### Using Blacklists
+
+There might be times where you want to shrink an entire directory, but exclude certain files.  To do this, you'll need
+pass a `TinyPng::Path` object to `@client.shrink`.
+
+```ruby
+@paths = TinyPng::Path.new '/images/path'
+@paths.blacklist '/images/path/blacklist.png'
+@client.shrink @paths
+```
+
+The blacklist array takes precedence over anything else inputted into this TinyPng::Path object.
+
+**NOTE:** TinyPng::Path objects are independent of each other.  If you send in multiple path objects to the `shrink` method,
+the blacklist from one path object will not impact the other path object.
+
+You can send in TinyPng::Path objects, directories, and full image paths to the shrink method, but each will
+be analyzed by itself and the blacklist from any path object will be self-contained.
+
 ### Using From Rake
 
 Create a Rakefile in your app's root (or add this to an existing Rakefile):
@@ -144,6 +164,13 @@ Combining directories and specific image files:
 SHRINK=/image/directory,/path/to/image.png rake tiny_png:shrink
 ```
 
+The Rake task uses the [blacklist method](#using-blacklists) in building out the full paths.  This method allows you
+to also specify blacklisted paths:
+
+```ruby
+SHRINK=/image/directory BLACKLIST=/image/directory/blacklist.png rake tiny_png:shrink
+```
+
 By default, this rake task will use the settings in config/tiny_png.yml.  You can overwrite specific settings by passing
 environment variables.  For example, if I do not suppress exceptions in my base config, but want
 to when running a rake task, all I would need to do is set the `SUPPRESS_EXCEPTIONS` environment variable to true:
@@ -161,7 +188,7 @@ API_KEY=my_api_key SHRINK=/some/image.png rake tiny_png:shrink
 Naturally, these can all be combined in any fashion:
 
 ```ruby
-SUPPRESS_EXCEPTIONS=true API_KEY=my_api_key SHRINK=/image/directory,/some/image.png rake tiny_png:shrink
+SUPPRESS_EXCEPTIONS=true API_KEY=my_api_key SHRINK=/image/directory,/some/image.png BLACKLIST=/image/directory/blacklist.png rake tiny_png:shrink
 ```
 
 ### Using With Capistrano
@@ -183,6 +210,9 @@ the assets are precompiled so that it isn't run multiple times per image:
 before 'deploy:assets:precompile', 'tiny_png:shrink'
 ```
 
+Ultimately, the Capistrano recipe will build and run a Rake task on the server, so you need to have the
+[Rakefile setup correctly](#using-from-rake).
+
 By default, this script uses the settings found in config/tiny_png.yml.  It also runs through the entire
 release directory.  Each option can be overwritten by setting Capistrano variables.  These variables will
 be sent directly to a Rake task, so the expected format of these variables is the same as listed above:
@@ -191,6 +221,7 @@ be sent directly to a Rake task, so the expected format of these variables is th
 set :tiny_png_shrink, '/image/directory,/some/image.png'
 set :tiny_png_api_key, 'my_api_key'
 set :tiny_png_suppress_exceptions, true
+set :tiny_png_blacklist, '/image/directory/blacklist.png'
 ```
 
 Also by default, the task is only run on web servers.  This can be modified by setting the `tiny_png_server_role`

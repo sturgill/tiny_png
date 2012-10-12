@@ -1,9 +1,3 @@
-require 'base64'
-require 'httparty'
-require 'tiny_png/exceptions'
-require 'tiny_png/shrink'
-require 'tiny_png/exception_handling'
-
 module TinyPng
   class Client
     include TinyPng::ExceptionHandling

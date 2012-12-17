@@ -16,7 +16,7 @@ PNGs smaller (which reduces bandwidth and increases site performance).
 
 ## What Does This Gem Do
 
-TinyPNG has opened up a private beta for programmatically calling using their services.  Before
+TinyPNG has opened up a private beta for programmatically using their services.  Before
 this API was introduced, TinyPNG could only be used from their [web interface](http://www.tinypng.org).
 And while their homepage is cool and all, manually uploading and saving files is a less-than-enjoyable
 process.  The kind of process a computer was made to do for you.  Ergo this gem.

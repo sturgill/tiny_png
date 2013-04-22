@@ -3,34 +3,7 @@
 </div>
 
 <div class="row-fluid">
-  <div class="span9">
+  <div class="span12">
     {{ content }}
   </div>
-	<div id="sidebar" class="span3">
-		<ul>
-			{% if page.url == '/index.html' %}
-				<li class="active"><a href="{{ BASE_PATH }}/">Overview</a></li>
-			{% else %}
-				<li><a href="{{ BASE_PATH }}/">Overview</a></li>
-			{% endif %}
-			
-			{% if page.url == '/usage.html' %}
-				<li class="active"><a href="{{ BASE_PATH }}/usage.html">Usage</a></li>
-			{% else %}
-				<li><a href="{{ BASE_PATH }}/usage.html">Usage</a></li>
-			{% endif %}
-			
-			{% if page.url == '/rake.html' %}
-				<li class="active"><a href="{{ BASE_PATH }}/rake.html">Rake</a></li>
-			{% else %}
-				<li><a href="{{ BASE_PATH }}/rake.html">Rake</a></li>
-			{% endif %}
-			
-			{% if page.url == '/capistrano.html' %}
-				<li class="active"><a href="{{ BASE_PATH }}/capistrano.html">Capistrano</a></li>
-			{% else %}
-				<li><a href="{{ BASE_PATH }}/capistrano.html">Capistrano</a></li>
-			{% endif %}
-		</ul>
-	</div>
 </div>
